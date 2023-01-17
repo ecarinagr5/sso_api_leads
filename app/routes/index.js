@@ -1,5 +1,5 @@
-var router = require("express").Router();
-var leads = require("./leads");
+const router = require("express").Router();
+const leads = require("./leads");
 
 router.use("/leads", leads);
 

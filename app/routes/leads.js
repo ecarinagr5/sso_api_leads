@@ -1,12 +1,12 @@
-var router = require("express").Router();
-router.get("/search", function (req, res) {
-  res.json({ message: "Vas a buscar un lead" });
-});
-router.get("/", function (req, res) {
-  res.json({ message: "Estás conectado a la API. Recurso: leads" });
-});
+const router = require("express").Router();
+const { leadsGET, leadsSearch } = require("../controller/leads");
+
+router.get("/search", leadsSearch);
+
+router.get("/", leadsGET);
+
 router.get("/:id", function (req, res) {
-  res.json({ message: "Vas a obtener la cerveza con id " + req.params.id });
+  res.json({ message: "Vas a obtener un lead con id " + req.params.id });
 });
 router.post("/", function (req, res) {
   res.json({ message: "Vas a añadir una cerveza" });
