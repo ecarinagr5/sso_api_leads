@@ -1,27 +1,27 @@
-var Connection = require("tedious").Connection;
+var sql = require("mssql");
+
+// config for your database
 var config = {
-  server: "azrarenabi.southcentralus.cloudapp.azure.com",
-  authentication: {
-    type: "default",
-    options: {
-      userName: "USR_CHIREY",
-      password: "$vE97zCu",
-    },
-  },
-  options: {
-    // If you are on Microsoft Azure, you need encryption:
-    encrypt: true,
-    database: "WEBSITE_CHIREY", //update me
-  },
+  user: "",
+  password: "",
+  server: "",
+  database: "",
+  synchronize: true,
+  trustServerCertificate: true,
 };
-var connection = new Connection(config);
-connection.on("connect", function (err) {
-  // If no error, then good to proceed.
-  console.log("Connected");
+
+// connect to your database
+sql.connect(config, function (err) {
+  if (err) console.log(err);
+
+  // create Request object
+  var request = new sql.Request();
+
+  // query to the database and get the records
+  request.query("select * from MASTER_TABLE2", function (err, recordset) {
+    if (err) console.log(err);
+
+    // send records as a response
+    res.send(recordset);
+  });
 });
-
-connection.connect();
-
-module.exports = {
-  connection,
-};
