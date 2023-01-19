@@ -1,20 +1,25 @@
 const router = require("express").Router();
-const { leadsGET, leadsSearch } = require("../controller/leads");
+const {
+  leadsGet,
+  leadsSearch,
+  leadsById,
+  leadsPost,
+} = require("../controller/leads");
 
 router.get("/search", leadsSearch);
 
-router.get("/", leadsGET);
+router.get("/", leadsGet);
 
-router.get("/:id", function (req, res) {
-  res.json({ message: "Vas a obtener un lead con id " + req.params.id });
-});
-router.post("/", function (req, res) {
-  res.json({ message: "Vas a añadir una cerveza" });
-});
+router.get("/:id", leadsById);
+
+router.post("/", leadsPost);
+
 router.put("/:id", function (req, res) {
-  res.json({ message: "Vas a actualizar la cerveza con id " + req.params.id });
+  res.json({
+    message: "You are going to update a lead by id " + req.params.id,
+  });
 });
 router.delete("/:id", function (req, res) {
-  res.json({ message: "Vas a borrar la cerveza con id " + req.params.id });
+  res.json({ message: "You are going to delete a lead" + req.params.id });
 });
 module.exports = router;
