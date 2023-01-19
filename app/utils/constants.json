@@ -1,0 +1,16 @@
+{
+  "test": {
+    "userDB": "USR_CHIREY",
+    "passwordDB": "$vE97zCu",
+    "server": "azrarenabi.southcentralus.cloudapp.azure.com",
+    "database": "WEBSITE_CHIREY",
+    "table": "MASTER_TABLE2"
+  },
+  "prod": {
+    "userDB": "USR_CHIREY",
+    "passwordDB": "$vE97zCu",
+    "server": "azrarenabi.southcentralus.cloudapp.azure.com",
+    "database": "WEBSITE_CHIREY",
+    "table": "MASTER_TABLE"
+  }
+}

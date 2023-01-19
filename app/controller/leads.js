@@ -1,5 +1,7 @@
 const { response, request } = require("express");
 const dbConfig = require("../database/config");
+const DB = require("../utils/constants.json");
+const { test, prod } = DB;
 let sql = require("mssql");
 
 const leadsGet = (req = request, res = response) => {
@@ -13,7 +15,7 @@ const leadsSearch = (req = request, res = response) => {
     const request = new sql.Request();
     // query to the database and get the records
     request.query(
-      "select * from MASTER_TABLE2 ORDER BY LEAD_ID DESC",
+      `select * from ${test.table} ORDER BY LEAD_ID DESC`,
       function (err, recordset) {
         if (err) console.log(err);
         // send records as a response
@@ -30,7 +32,7 @@ const leadsById = (req = request, res = response) => {
     const request = new sql.Request();
     // query to the database and get the records
     request.query(
-      "select TOP 1 * from MASTER_TABLE2 ORDER BY LEAD_ID DESC",
+      `select TOP 1 * from ${test.table}  ORDER BY LEAD_ID DESC`,
       function (err, recordset) {
         if (err) console.log(err);
         // send records as a response
@@ -74,7 +76,9 @@ const leadsPost = async (req, res = response) => {
     .slice(0, 19)
     .replace("T", " ");
   let insert =
-    "insert into MASTER_TABLE2(LEAD_ID,LD_NAME,LD_LAST_NAME,LD_EMAIL,LD_PHONE_NUM,LD_ZIPCODE,VENDOR_ID,MODEL_ID,CAMPAIGN,LD_REG_DATE,UTM_SOURCE,UTM_MEDIUM,UTM_CAMPAIGN,TD_DATE,TD_HOUR,QTN_PRICE,QTN_TERM_OF_FINANCE,QTN_DOWN_PAYMENT,QTN_AMOUNT,QTN_FINANCING_PLAN,QTN_INSURANCE_COMPANY) values ('" +
+    "insert into " +
+    test.table +
+    "(LEAD_ID,LD_NAME,LD_LAST_NAME,LD_EMAIL,LD_PHONE_NUM,LD_ZIPCODE,VENDOR_ID,MODEL_ID,CAMPAIGN,LD_REG_DATE,UTM_SOURCE,UTM_MEDIUM,UTM_CAMPAIGN,TD_DATE,TD_HOUR,QTN_PRICE,QTN_TERM_OF_FINANCE,QTN_DOWN_PAYMENT,QTN_AMOUNT,QTN_FINANCING_PLAN,QTN_INSURANCE_COMPANY) values ('" +
     LEAD_ID +
     "','" +
     LD_NAME +

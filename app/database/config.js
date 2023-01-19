@@ -1,9 +1,11 @@
-// config for your database
+const DB = require("../utils/constants.json");
+const { test, prod } = DB;
+
 const dbConfig = {
-  user: "USR_CHIREY",
-  password: "$vE97zCu",
-  server: "azrarenabi.southcentralus.cloudapp.azure.com",
-  database: "WEBSITE_CHIREY",
+  user: test.userDB,
+  password: test.passwordDB,
+  server: test.server,
+  database: test.database,
   synchronize: true,
   trustServerCertificate: true,
 };
